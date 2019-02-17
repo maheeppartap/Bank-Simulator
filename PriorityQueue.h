@@ -65,5 +65,68 @@ public:
     // Time Efficiency: O(1)
     T& peek() const throw(EmptyDataCollectionException);
 
-}; // end PriorityQueue
+};
+
+template<class T>
+PriorityQueue<T>::PriorityQueue() {
+    head = NULL;
+    elementCount = 0;
+}
+
+template<class T>
+int PriorityQueue<T>::getElementCount() const {
+    return elementCount;
+}
+
+template<class T>
+bool PriorityQueue<T>::isEmpty() const {
+    return head == NULL;
+}
+
+template<class T>
+bool PriorityQueue<T>::enqueue(const T &newElement) {
+    bool Rvalue = false;
+    Node<T> a;
+    a.data = newElement;
+    if(elementCount == 0){
+        head = a;
+        a.next = nullptr;
+        elementCount++;
+        Rvalue = true;
+    }
+    if(head->data>newElement){
+        a.next = head;
+        head = a;
+        elementCount++;
+        Rvalue = true;
+    }else {
+        Node<T> *temp = head;
+        while (temp->next->data > newElement || temp->next != NULL) {
+            temp = head->next;
+        }
+        Node<T> *temp2 = temp->next;
+        temp->next = a;
+        a.next = temp2;
+        elementCount++;
+        Rvalue = true;
+    }
+    return Rvalue;
+}
+
+template<class T>
+bool PriorityQueue<T>::dequeue() {
+    if(elementCount == 0)
+        return false;
+    head = head->next;
+    elementCount--;
+    return true;
+}
+
+template<class T>
+T &PriorityQueue<T>::peek() const {
+    if(elementCount == 0)
+        throw EmptyDataCollectionException("Queue is empty");
+    return head->data;
+}
+// end PriorityQueue
 
