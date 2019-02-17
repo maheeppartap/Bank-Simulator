@@ -1,6 +1,7 @@
 
 #pragma once
 
+template<class T>
 class Node
 {
 public:
@@ -10,7 +11,27 @@ public:
 	
 	// Constructors (why no destructor?)
 	Node();
-	Node(int theData);
-	Node(int theData, Node* theNextNode);
+	Node(T theData);
+	Node(T theData, Node* theNextNode);
 
 }; // end Node
+template <class T>
+Node<T>::Node()
+{
+	data = 0;
+	next = NULL;
+}
+
+template <class T>
+Node<T>::Node(T theData)
+{
+	data = theData;
+	next = NULL;
+}
+
+template <class T>
+Node<T>::Node(T theData, Node* theNextNode)
+{
+	data = theData;
+	next = theNextNode;
+}

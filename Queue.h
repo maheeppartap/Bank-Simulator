@@ -12,7 +12,7 @@
 template <class ElementType> class Queue {
     private:
         static ElementType const INITIAL_SIZE = 6;
-        int* elements;
+        ElementType* elements;
 
         ElementType elementCount;  // number of elements in the queue
         ElementType capacity;      // number of cells in the array
