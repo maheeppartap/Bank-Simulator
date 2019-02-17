@@ -7,16 +7,17 @@
  * Author: Maheeppartap Singh
  * Date: 2018-02-04
  */
+#include "EmptyDataCollectionException.h"
 
-class Queue {
+template <class ElementType> class Queue {
     private:
-        static unsigned const INITIAL_SIZE = 6;
-        int* elements;  // replace this by int * elements in Question 4(a)
+        static ElementType const INITIAL_SIZE = 6;
+        int* elements;
 
-        unsigned elementCount;  // number of elements in the queue
-        unsigned capacity;      // number of cells in the array
-        unsigned frontindex;    // index the topmost element
-        unsigned backindex;     // index where the next element will be placed
+        ElementType elementCount;  // number of elements in the queue
+        ElementType capacity;      // number of cells in the array
+        ElementType frontindex;    // index the topmost element
+        ElementType backindex;     // index where the next element will be placed
 
     public:
         // Desc:  Constructor
@@ -27,7 +28,7 @@ class Queue {
 
 
         // Desc:  Inserts element x at the back (O(1))
-        bool enqueue(int x);
+        bool enqueue(ElementType x);
 
 
         // Desc:  Removes the frontmost element (O(1))
@@ -37,7 +38,7 @@ class Queue {
 
         // Desc:  Returns a copy of the frontmost element (O(1))
         //  Pre:  Queue not empty
-        int peek() const;
+        ElementType & peek(EmptyDataCollectionException) const;
 
 
         // Desc:  Returns true if and only if queue empty (O(1))
@@ -45,7 +46,80 @@ class Queue {
 };
 
 
+// Desc:  Constructor
+template <class ElementType>
+Queue<ElementType>::Queue() : elementCount(0), capacity(INITIAL_SIZE), frontindex(0), backindex(0) {
+    elements = new Queue<ElementType>[capacity];
+} // constructor
 
+
+// Desc:  Inserts element x at the back (O(1))
+template <class ElementType>
+bool Queue<ElementType>::enqueue(ElementType x) {
+    ElementType oldCount = elementCount;
+    if(elementCount == capacity){   //Checks if the Queue is full or not
+        ElementType newSize = capacity*2;  //Doubles the capacity
+        ElementType* new_arr = new ElementType[newSize];
+        ElementType i,j = 0;
+        for(i = frontindex ; j < capacity ; i = ( i + 1)%capacity){
+            new_arr[j] = elements[i];
+            j++;
+        }
+        delete elements;    //Deleting the old Queue
+        elements = new_arr;
+        backindex = capacity;
+        capacity = newSize;
+        frontindex = 0;
+    }
+
+    elementCount++;
+    elements[backindex] = x;    //Insert the new element
+    backindex = (backindex + 1) % capacity;
+    return elementCount>oldCount;
+} // enqueue
+
+
+// Desc:  Removes the frontmost element (O(1))
+//  Pre:  Queue not empty
+template <class ElementType>
+ bool Queue<ElementType>::dequeue() {
+    ElementType oldCount = elementCount;
+    if( elementCount < capacity/4 && elementCount/4 > INITIAL_SIZE){    //Checks if the Queue is 1/4 of the capacity
+        auto * new_arr = new ElementType[capacity/4];                      //Making a new array with 1/4th of the capacity to save space
+        ElementType j = 0;
+        for(ElementType i = frontindex ; j < capacity ; i = ( i + 1)%capacity){
+            new_arr[j] = elements[i];
+            j++;
+        }
+        delete elements;
+        elements = new_arr;
+        frontindex = (frontindex + 1) % capacity;
+        return elementCount<oldCount;
+    }
+    elementCount--;
+    frontindex = (frontindex + 1) % capacity;
+    return elementCount<oldCount;
+
+} // dequeue
+// Desc:  Returns true if and only if queue empty (O(1))
+template <class ElementType>
+bool Queue<ElementType>::isEmpty() const {
+    return elementCount == 0;
+}
+template <class ElementType>
+Queue<ElementType>::~Queue() {
+    delete elements;
+}
+
+// Desc:  Returns a copy of the frontmost element (O(1))
+//  Pre:  Queue not empty
+template<class ElementType>
+ElementType & Queue<ElementType>::peek(EmptyDataCollectionException) const {
+
+}
+//top
+
+// isempty
 
 
 
