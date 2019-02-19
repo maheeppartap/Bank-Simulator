@@ -2,8 +2,9 @@
 #include <stdio.h>
 #include "Event.h"
 using namespace std;
-
-
+/*todo: add a destructor
+ *
+*/
 void Event::setTime(const int t) {
     time = t;
 }
@@ -34,10 +35,10 @@ int Event::getLength() const {
 Event::Event() {
    length = 0;
    time = 0;
-   type = 'a';
+   type = NULL;
 }
 
-
+//overloading the << just to print the output of the object
 ostream &operator << (ostream &os, const Event &e)  {
     os << e.getLength()<<" , " <<e.getTime() << " , "<<e.getType()<<endl;
     return os;

@@ -10,7 +10,8 @@
  */
 
 /* None of the current content of this file can be modified. */
-
+/* todo: make a constructor and destructor
+ * */
 #pragma once
 
 #include "Node.h"
@@ -63,7 +64,7 @@ public:
     // Postcondition: This Priority Queue is unchanged.
     // Exceptions: Throws EmptyDataCollectionException if this Priority Queue is empty.
     // Time Efficiency: O(1)
-    T& peek() const throw(EmptyDataCollectionException);
+    T& peek() throw(EmptyDataCollectionException);
 
 };
 
@@ -85,32 +86,9 @@ bool PriorityQueue<T>::isEmpty() const {
 
 template<class T>
 bool PriorityQueue<T>::enqueue(const T &newElement) {
-    bool Rvalue = false;
-    Node<T> a;
-    a.data = newElement;
-    if(elementCount == 0){
-        head = a;
-        a.next = nullptr;
-        elementCount++;
-        Rvalue = true;
-    }
-    if(head->data>newElement){
-        a.next = head;
-        head = a;
-        elementCount++;
-        Rvalue = true;
-    }else {
-        Node<T> *temp = head;
-        while (temp->next->data > newElement || temp->next != NULL) {
-            temp = head->next;
-        }
-        Node<T> *temp2 = temp->next;
-        temp->next = a;
-        a.next = temp2;
-        elementCount++;
-        Rvalue = true;
-    }
-    return Rvalue;
+
+
+
 }
 
 template<class T>
@@ -123,10 +101,16 @@ bool PriorityQueue<T>::dequeue() {
 }
 
 template<class T>
-T &PriorityQueue<T>::peek() const {
-    if(elementCount == 0)
-        throw EmptyDataCollectionException("Queue is empty");
-    return head->data;
+T &PriorityQueue<T>::peek()  throw(EmptyDataCollectionException) {
+    try{
+        if(elementCount == 0){
+            throw 1;
+        }
+    }
+    catch(int){
+        EmptyDataCollectionException("Queue is empty");
+    }
 }
-// end PriorityQueue
+
+
 

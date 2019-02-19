@@ -49,7 +49,7 @@ template <class ElementType> class Queue {
 // Desc:  Constructor
 template <class ElementType>
 Queue<ElementType>::Queue() : elementCount(0), capacity(INITIAL_SIZE), frontindex(0), backindex(0) {
-    elements = new Queue<ElementType>[capacity];
+    elements = new ElementType[capacity];
 } // constructor
 
 
@@ -59,7 +59,7 @@ bool Queue<ElementType>::enqueue(ElementType x) {
     ElementType oldCount = elementCount;
     if(elementCount == capacity){   //Checks if the Queue is full or not
         ElementType newSize = capacity*2;  //Doubles the capacity
-        ElementType* new_arr = new ElementType[newSize];
+        auto new_arr = new ElementType[newSize];
         ElementType i,j = 0;
         for(i = frontindex ; j < capacity ; i = ( i + 1)%capacity){
             new_arr[j] = elements[i];
@@ -113,9 +113,18 @@ Queue<ElementType>::~Queue() {
 
 // Desc:  Returns a copy of the frontmost element (O(1))
 //  Pre:  Queue not empty
+
+
 template<class ElementType>
 ElementType & Queue<ElementType>::peek(EmptyDataCollectionException) const {
-
+    try{
+        if (elementCount == 0)
+            throw 1;
+        return frontindex;
+    }
+    catch(int){
+        EmptyDataCollectionException("Queue is empty");
+    }
 }
 //top
 
