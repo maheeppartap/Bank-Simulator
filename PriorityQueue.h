@@ -64,7 +64,7 @@ public:
     // Postcondition: This Priority Queue is unchanged.
     // Exceptions: Throws EmptyDataCollectionException if this Priority Queue is empty.
     // Time Efficiency: O(1)
-    T& peek() throw(EmptyDataCollectionException);
+    T& peek() noexcept(false);
 
 };
 
@@ -75,42 +75,69 @@ PriorityQueue<T>::PriorityQueue() {
 }
 
 template<class T>
+PriorityQueue<T>::~PriorityQueue(){
+    Node<T>* t = head;
+    while(t != nullptr){
+        Node<T>* temp = t->next;
+        delete t;
+        t = temp;
+    }
+}
+
+template<class T>
 int PriorityQueue<T>::getElementCount() const {
     return elementCount;
 }
 
 template<class T>
 bool PriorityQueue<T>::isEmpty() const {
-    return head == NULL;
+    return head == nullptr;
 }
 
 template<class T>
 bool PriorityQueue<T>::enqueue(const T &newElement) {
 
+    if(isEmpty()){
+        head = new Node<T>(newElement, nullptr);
+        return true;
+    }
+    //special case if smaller than the head
+    if(newElement < head->data){
+        head = new Node<T>(newElement,head);
+        return true;
+    }
+    Node<T>* t = head;
+        //get t to either the first element that is the same
+    while(t->next != nullptr && t->next->data <= newElement)
+        t = t->next;
 
-
+    Node<T>* node = new Node<T>(newElement,t->next);
+    t->next = node;
+    elementCount++;
+    return true;
 }
 
 template<class T>
 bool PriorityQueue<T>::dequeue() {
-    if(elementCount == 0)
+    if(isEmpty()){
         return false;
-    head = head->next;
+    }
+
+    Node<T>* temp = head;
+    head = temp->next;
+    delete temp;
     elementCount--;
     return true;
 }
 
 template<class T>
-T &PriorityQueue<T>::peek()  throw(EmptyDataCollectionException) {
-    try{
-        if(elementCount == 0){
-            throw 1;
-        }
-    }
-    catch(int){
-        EmptyDataCollectionException("Queue is empty");
-    }
+T &PriorityQueue<T>::peek(){
+    if(isEmpty())
+        throw -1;
+
+    return head->data;
 }
+
 
 
 

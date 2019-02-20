@@ -8,41 +8,42 @@
  * Date: 2018-02-04
  */
 #include "EmptyDataCollectionException.h"
+template <class ElementType>
 
-template <class ElementType> class Queue {
-    private:
-        static ElementType const INITIAL_SIZE = 6;
-        ElementType* elements;
+class Queue {
+private:
+    static ElementType const INITIAL_SIZE = 6;
+    ElementType* elements;
 
-        ElementType elementCount;  // number of elements in the queue
-        ElementType capacity;      // number of cells in the array
-        ElementType frontindex;    // index the topmost element
-        ElementType backindex;     // index where the next element will be placed
+    ElementType elementCount;  // number of elements in the queue
+    ElementType capacity;      // number of cells in the array
+    ElementType frontindex;    // index the topmost element
+    ElementType backindex;     // index where the next element will be placed
 
-    public:
-        // Desc:  Constructor
-        Queue();
+public:
+    // Desc:  Constructor
+    Queue();
 
-        //Desc : Destructor
-        ~Queue();
-
-
-        // Desc:  Inserts element x at the back (O(1))
-        bool enqueue(ElementType x);
+    //Desc : Destructor
+    ~Queue();
 
 
-        // Desc:  Removes the frontmost element (O(1))
-        //  Pre:  Queue not empty
-        bool dequeue();
+    // Desc:  Inserts element x at the back (O(1))
+    bool enqueue(ElementType x);
 
 
-        // Desc:  Returns a copy of the frontmost element (O(1))
-        //  Pre:  Queue not empty
-        ElementType & peek(EmptyDataCollectionException) const;
+    // Desc:  Removes the frontmost element (O(1))
+    //  Pre:  Queue not empty
+    bool dequeue();
 
 
-        // Desc:  Returns true if and only if queue empty (O(1))
-        bool isEmpty() const;
+    // Desc:  Returns a copy of the frontmost element (O(1))
+    //  Pre:  Queue not empty
+    ElementType & peek(EmptyDataCollectionException) const;
+
+
+    // Desc:  Returns true if and only if queue empty (O(1))
+    bool isEmpty() const;
 };
 
 
@@ -82,7 +83,7 @@ bool Queue<ElementType>::enqueue(ElementType x) {
 // Desc:  Removes the frontmost element (O(1))
 //  Pre:  Queue not empty
 template <class ElementType>
- bool Queue<ElementType>::dequeue() {
+bool Queue<ElementType>::dequeue() {
     ElementType oldCount = elementCount;
     if( elementCount < capacity/4 && elementCount/4 > INITIAL_SIZE){    //Checks if the Queue is 1/4 of the capacity
         auto * new_arr = new ElementType[capacity/4];                      //Making a new array with 1/4th of the capacity to save space
