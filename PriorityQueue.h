@@ -102,8 +102,8 @@ bool PriorityQueue<T>::enqueue(const T &newElement) {
         return true;
     }
     //special case if smaller than the head
-    if(newElement < head->data){
-        head = new Node<T>(newElement,head);
+    if(newElement < head->data){                //thus wont work because we aernt comparing the events.
+        head = new Node<T>(newElement,head);    //overload the > operator
         return true;
     }
     Node<T>* t = head;
@@ -142,6 +142,8 @@ T &PriorityQueue<T>::peek(){
 
     return head->data;
 }
+
+
 
 
 

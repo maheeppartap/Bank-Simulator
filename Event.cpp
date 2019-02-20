@@ -44,4 +44,12 @@ ostream &operator << (ostream &os, const Event &e)  {
     return os;
 }
 
-
+//todo: implementing this overload function to compare the priority of the events
+bool operator <(Event a,Event b) {
+    if (a.getType() < b.getType())
+        return true;
+    else if (a.getType() == b.getType()) {
+        return a.getTime() <= b.getTime();
+    }
+    return false;
+}
