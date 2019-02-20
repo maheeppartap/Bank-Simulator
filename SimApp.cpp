@@ -9,7 +9,11 @@
 
 using namespace std;
 int main() {
-    Queue<int> BankLine;  //Empty bank line
+
+
+
+
+    Queue<Event> BankLine;  //Empty bank line
     PriorityQueue<Event> EventQueue;    //Empty Event Queue
 
     bool tellerAvailable = true;    //Teller is available
@@ -21,27 +25,53 @@ int main() {
         exit(-1);
     }
     int arrival,pTime;
-    Event insertion;
+    Event arr,dep;
     //Read input and insert into the Event Queue
     while( !file.eof()){
         file>>arrival;
         file>>pTime;
-        cout<<"arrival at :"<<arrival<<endl;
-        cout<<"Process time :"<<pTime<<endl;
-        insertion.setTime(arrival);
-        insertion.setLength(pTime);
-        EventQueue.enqueue(insertion);
+        arr.setTime(arrival);
+        arr.setLength(pTime);
+        arr.setType('A');
+        EventQueue.enqueue(arr);    //in goes the arrival
     }
 
     Event newEvent;
     //Event loop
-    while(!EventQueue.isEmpty()){
+    while(!EventQueue.isEmpty()) {
         newEvent = EventQueue.peek();
-
+        Event customer = newEvent;
         //getting current time
-        int cuurenttime = newEvent.getTime();
+        int curentTime = newEvent.getTime();
+        if (newEvent.getType() == 'A') {
+            EventQueue.dequeue();
+            if(BankLine.isEmpty() && tellerAvailable ){
+                dep.setType('D');
+                dep.setTime(curentTime+newEvent.getLength());
+                dep.setLength(0);
+                cout<<"Arrival at : "<<curentTime<<endl;
+                EventQueue.enqueue(dep);
+                tellerAvailable = false;
+            } else{
+                cout<<"YOOOOOOOOOOOOOOOOArrival at : "<<curentTime<<endl;
+                BankLine.enqueue(customer);
+            }
+        } else {//Its a departure event now
+           cout<<"departure at : "<<curentTime<<endl;
+            EventQueue.dequeue();
+            if( !BankLine.isEmpty()){
+                //next customer
+                customer = BankLine.peek(EmptyDataCollectionException());
+                BankLine.dequeue();
+                dep.setType('D');
+                dep.setTime(curentTime+customer.getLength());
+                EventQueue.enqueue(dep);
+            }else {tellerAvailable = true;
+        }
+        }
     }
 
 
-return 1;
+    return 1;
 }
+

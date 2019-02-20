@@ -12,13 +12,13 @@ template <class ElementType>
 
 class Queue {
 private:
-    static ElementType const INITIAL_SIZE = 6;
+    static int const INITIAL_SIZE = 100;
     ElementType* elements;
 
-    ElementType elementCount;  // number of elements in the queue
-    ElementType capacity;      // number of cells in the array
-    ElementType frontindex;    // index the topmost element
-    ElementType backindex;     // index where the next element will be placed
+    int elementCount;  // number of elements in the queue
+    int capacity;      // number of cells in the array
+    int frontindex;    // index the topmost element
+    int backindex;     // index where the next element will be placed
 
 public:
     // Desc:  Constructor
@@ -57,11 +57,11 @@ Queue<ElementType>::Queue() : elementCount(0), capacity(INITIAL_SIZE), frontinde
 // Desc:  Inserts element x at the back (O(1))
 template <class ElementType>
 bool Queue<ElementType>::enqueue(ElementType x) {
-    ElementType oldCount = elementCount;
-    if(elementCount == capacity){   //Checks if the Queue is full or not
-        ElementType newSize = capacity*2;  //Doubles the capacity
+    int oldCount = elementCount;
+  /*  if(elementCount == capacity){   //Checks if the Queue is full or not
+        int newSize = capacity*2;  //Doubles the capacity
         auto new_arr = new ElementType[newSize];
-        ElementType i,j = 0;
+        int i,j = 0;
         for(i = frontindex ; j < capacity ; i = ( i + 1)%capacity){
             new_arr[j] = elements[i];
             j++;
@@ -72,7 +72,7 @@ bool Queue<ElementType>::enqueue(ElementType x) {
         capacity = newSize;
         frontindex = 0;
     }
-
+*/
     elementCount++;
     elements[backindex] = x;    //Insert the new element
     backindex = (backindex + 1) % capacity;
@@ -84,11 +84,11 @@ bool Queue<ElementType>::enqueue(ElementType x) {
 //  Pre:  Queue not empty
 template <class ElementType>
 bool Queue<ElementType>::dequeue() {
-    ElementType oldCount = elementCount;
+    int oldCount = elementCount;
     if( elementCount < capacity/4 && elementCount/4 > INITIAL_SIZE){    //Checks if the Queue is 1/4 of the capacity
         auto * new_arr = new ElementType[capacity/4];                      //Making a new array with 1/4th of the capacity to save space
-        ElementType j = 0;
-        for(ElementType i = frontindex ; j < capacity ; i = ( i + 1)%capacity){
+        int j = 0;
+        for(int i = frontindex ; j < capacity ; i = ( i + 1)%capacity){
             new_arr[j] = elements[i];
             j++;
         }
@@ -118,14 +118,13 @@ Queue<ElementType>::~Queue() {
 
 template<class ElementType>
 ElementType & Queue<ElementType>::peek(EmptyDataCollectionException) const {
-    try{
-        if (elementCount == 0)
-            throw 1;
-        return frontindex;
+   try{if(isEmpty())
+        throw EmptyDataCollectionException("Queue is empty\n");
     }
-    catch(int){
-        EmptyDataCollectionException("Queue is empty");
+    catch(EmptyDataCollectionException& e){
+        cout<<e.what();
     }
+    return elements[frontindex];
 }
 //top
 

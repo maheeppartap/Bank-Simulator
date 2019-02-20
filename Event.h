@@ -33,5 +33,9 @@ public:
     int getLength()const;
 
     friend ostream&operator<<(ostream & os,const Event & e);
+
+    friend bool operator <(Event a,Event b);
+
+    friend bool operator >(Event b,Event a);
 };
 #endif //ASSIGNMENT_3_EVENT_H

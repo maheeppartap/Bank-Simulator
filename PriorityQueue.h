@@ -99,16 +99,18 @@ bool PriorityQueue<T>::enqueue(const T &newElement) {
 
     if(isEmpty()){
         head = new Node<T>(newElement, nullptr);
+        elementCount++;      //you werent incrementing the elementcount in the special cases
         return true;
     }
     //special case if smaller than the head
-    if(newElement < head->data){                //thus wont work because we aernt comparing the events.
+    if(newElement < head->data){                //this wont work because we aernt comparing the events.
         head = new Node<T>(newElement,head);    //overload the > operator
+        elementCount++;
         return true;
     }
     Node<T>* t = head;
         //get t to either the first element that is the same
-    while(t->next != nullptr && t->next->data <= newElement)
+    while(t->next != nullptr && t->next->data < newElement)
         t = t->next;
 
     Node<T>* node = new Node<T>(newElement,t->next);

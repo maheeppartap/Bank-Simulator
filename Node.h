@@ -6,7 +6,7 @@ class Node
 {
 public:
 	// Public attributes - Why are the attributes public?
-	int data;     // The data in the node
+	T data;     // The data in the node
 	Node* next;   // Pointer to next node
 	
 	// Constructors (why no destructor?)
