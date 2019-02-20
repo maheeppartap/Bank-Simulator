@@ -130,10 +130,15 @@ bool PriorityQueue<T>::dequeue() {
     return true;
 }
 
+//This is how we throw exceptions
 template<class T>
 T &PriorityQueue<T>::peek(){
-    if(isEmpty())
-        throw -1;
+    try{if(isEmpty())
+        throw EmptyDataCollectionException("Queue is empty\n");
+    }
+    catch(EmptyDataCollectionException& e){
+        cout<<e.what();
+    }
 
     return head->data;
 }

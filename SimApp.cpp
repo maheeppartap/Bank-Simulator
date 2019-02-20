@@ -9,6 +9,7 @@
 using namespace std;
 int main() {
     PriorityQueue<int> a;
+    a.peek();
     for(int i = 0 ; i < 10 ; i ++){
         a.enqueue(i);
     }
