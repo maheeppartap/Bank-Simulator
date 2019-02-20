@@ -53,7 +53,7 @@ int main() {
                 EventQueue.enqueue(dep);
                 tellerAvailable = false;
             } else{
-                cout<<"YOOOOOOOOOOOOOOOOArrival at : "<<curentTime<<endl;
+                cout<<"Arrival at : "<<curentTime<<endl;
                 BankLine.enqueue(customer);
             }
         } else {//Its a departure event now
