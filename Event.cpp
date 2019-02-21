@@ -49,10 +49,12 @@ ostream &operator << (ostream &os, const Event &e)  {
 //overloading the comparison operators to compare events
 
 bool operator<(Event a, Event b) {
-  if(a.getType() == 'A' && b.getType() == 'D')
-      return true;
-  else
-      return a.getType() == 'D' && b.getType() == 'A' ? true : a.getTime() < b.getTime();
+    if(a.getType()<b.getType())
+        return true;
+    else if(a.getType() == b.getType()){
+        return a.getTime()<b.getTime();
+    }return false;
+
 
 }
 
