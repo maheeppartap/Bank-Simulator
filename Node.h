@@ -19,14 +19,14 @@ template <class T>
 Node<T>::Node()
 {
 	data = 0;
-	next = NULL;
+	next = nullptr;
 }
 
 template <class T>
 Node<T>::Node(T theData)
 {
 	data = theData;
-	next = NULL;
+	next = nullptr;
 }
 
 template <class T>

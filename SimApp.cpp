@@ -36,6 +36,7 @@ int main() {
     Event newEvent;
     //Event loop
     while(!EventQueue.isEmpty()) {
+
         newEvent = EventQueue.peek();
         Event customer = newEvent;
         //getting current time
@@ -63,26 +64,11 @@ int main() {
                 dep.setType('D');
                 dep.setTime(curentTime+customer.getLength());
                 EventQueue.enqueue(dep);
-            }else {tellerAvailable = true;
+            }else {
+                tellerAvailable = true;
             }
         }
     }
 
-    PriorityQueue<int> a = PriorityQueue<int>();
-
-    for(int i = 10; i > 0; i--){
-        a.enqueue(i);
-    }
-    while(!a.isEmpty()){
-
-        try{
-            cout<< a.peek() << endl;
-            a.dequeue();
-        }catch(EmptyDataCollectionException &e){
-            cout << "caught empty queue except"<<endl;
-        }
-    }
-
-    return 1;
+    return 0;
 }
-
