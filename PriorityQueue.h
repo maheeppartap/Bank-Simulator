@@ -66,6 +66,19 @@ public:
     // Time Efficiency: O(1)
     T& peek() noexcept(false);
 
+    friend ostream & operator<< (ostream & os, const PriorityQueue<T>& rhs) {
+        Node<T>* current = rhs.head;
+
+        os << "elementCount = " << rhs.elementCount;
+
+        // Traverse the list
+        while (current != NULL){
+            cout << current -> data; // Print data
+            current = current -> next; // Go to next Node
+        }
+
+        return os;
+    } // end of operator <<
 };
 
 template<class T>
@@ -135,12 +148,9 @@ bool PriorityQueue<T>::dequeue() {
 //This is how we throw exceptions
 template<class T>
 T &PriorityQueue<T>::peek(){
-    try{if(isEmpty())
+
+    if(isEmpty())
         throw EmptyDataCollectionException("Queue is empty\n");
-    }
-    catch(EmptyDataCollectionException& e){
-        cout<<e.what();
-    }
 
     return head->data;
 }

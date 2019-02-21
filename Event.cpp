@@ -35,7 +35,7 @@ int Event::getLength() const {
 Event::Event() {
    length = 0;
    time = 0;
-   type = NULL;
+   type = 0;
 }
 
 //overloading the << just to print the output of the object

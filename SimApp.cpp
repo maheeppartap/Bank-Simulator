@@ -9,11 +9,8 @@
 
 using namespace std;
 int main() {
-
-
-
-
-    Queue<Event> BankLine;  //Empty bank line
+/*
+    Queue<int> BankLine;  //Empty bank line
     PriorityQueue<Event> EventQueue;    //Empty Event Queue
 
     bool tellerAvailable = true;    //Teller is available
@@ -57,7 +54,7 @@ int main() {
                 BankLine.enqueue(customer);
             }
         } else {//Its a departure event now
-           cout<<"departure at : "<<curentTime<<endl;
+            cout<<"departure at : "<<curentTime<<endl;
             EventQueue.dequeue();
             if( !BankLine.isEmpty()){
                 //next customer
@@ -67,10 +64,24 @@ int main() {
                 dep.setTime(curentTime+customer.getLength());
                 EventQueue.enqueue(dep);
             }else {tellerAvailable = true;
-        }
+            }
         }
     }
+    */
+    PriorityQueue<int> a = PriorityQueue<int>();
 
+    for(int i = 10; i > 0; i--){
+        a.enqueue(i);
+    }
+    while(!a.isEmpty()){
+
+        try{
+            cout<< a.peek() << endl;
+            a.dequeue();
+        }catch(EmptyDataCollectionException &e){
+            cout << "caught empty queue except"<<endl;
+        }
+    }
 
     return 1;
 }
