@@ -16,7 +16,7 @@ int main() {
     bool tellerAvailable = true;    //Teller is available
 //We have to place the input file in the cmake-build-debug folder for the program to read because it looks for it there by default
     ifstream file;
-    file.open("simulationShuffled1.in");
+    file.open("../simulationShuffled1.in");
     if( !file ) {
         cerr << "FAILED : Could not open the file" << endl;
         exit(-1);
