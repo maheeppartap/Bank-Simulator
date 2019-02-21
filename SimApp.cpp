@@ -9,8 +9,8 @@
 
 using namespace std;
 int main() {
-/*
-    Queue<int> BankLine;  //Empty bank line
+
+    Queue<Event> BankLine;  //Empty bank line
     PriorityQueue<Event> EventQueue;    //Empty Event Queue
 
     bool tellerAvailable = true;    //Teller is available
@@ -67,7 +67,7 @@ int main() {
             }
         }
     }
-    */
+
     PriorityQueue<int> a = PriorityQueue<int>();
 
     for(int i = 10; i > 0; i--){
