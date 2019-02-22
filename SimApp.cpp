@@ -9,9 +9,11 @@
 
 using namespace std;
 int main() {
-
+    cout<<"Simulation Begins"<<endl;
     Queue<Event> BankLine;  //Empty bank line
     PriorityQueue<Event> EventQueue;    //Empty Event Queue
+    int pplCounter = 0; //counts the number of customers
+    float avg = 0;
 
     bool tellerAvailable = true;    //Teller is available
 //We have to place the input file in the cmake-build-debug folder for the program to read because it looks for it there by default
@@ -47,15 +49,17 @@ int main() {
                 dep.setType('D');
                 dep.setTime(curentTime+newEvent.getLength());
                 dep.setLength(0);
-                cout<<"Arrival at : "<<curentTime<<endl;
+                cout<<"Processing an arrival event at time:   "<<curentTime<<endl;
                 EventQueue.enqueue(dep);
+                pplCounter++;
                 tellerAvailable = false;
             } else{
-                cout<<"Arrival at : "<<curentTime<<endl;
+                cout<<"Processing an arrival event at time:   "<<curentTime<<endl;
+                pplCounter++;
                 BankLine.enqueue(customer);
             }
         } else {//Its a departure event now
-            cout<<"departure at : "<<curentTime<<endl;
+            cout<<"Processing a departure event at time:  "<<curentTime<<endl;
             EventQueue.dequeue();
             if( !BankLine.isEmpty()){
                 //next customer
@@ -64,11 +68,17 @@ int main() {
                 dep.setType('D');
                 dep.setTime(curentTime+customer.getLength());
                 EventQueue.enqueue(dep);
-            }else {
+                avg = avg + curentTime - customer.getTime();
+               }else {
                 tellerAvailable = true;
             }
         }
     }
+    cout<<"Simulation Ends"<<endl<<endl;
+    cout<<"Final Statistics:"<<endl;
+    cout<<"    Total number of people processed:  "<<pplCounter<<endl;
+    cout<<"    Average amount of time spent waiting: "<<avg/pplCounter<<endl;
+
 
     return 0;
 }
