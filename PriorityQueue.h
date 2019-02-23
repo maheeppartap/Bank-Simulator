@@ -7,11 +7,11 @@
  * Author: Inspired by Frank M. Carrano and Tim Henry (textbook).
  * Modified: February 2019
  *
+ *  Implemented by -> Maheeeppartap Singh and Conor Murphy
  */
 
 /* None of the current content of this file can be modified. */
-/* todo: make a constructor and destructor
- * */
+
 #pragma once
 
 #include "Node.h"
@@ -126,7 +126,7 @@ bool PriorityQueue<T>::enqueue(const T &newElement) {
     while(t->next != nullptr && t->next->data < newElement)
         t = t->next;
 
-    Node<T>* node = new Node<T>(newElement,t->next);
+    auto * node = new Node<T>(newElement,t->next);
     t->next = node;
     elementCount++;
     return true;
@@ -149,7 +149,7 @@ bool PriorityQueue<T>::dequeue() {
 template<class T>
 T &PriorityQueue<T>::peek(){
 
-    if(isEmpty())
+    if(isEmpty())   //Cehcking if the queue is empty
         throw EmptyDataCollectionException("Queue is empty\n");
 
     return head->data;

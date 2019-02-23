@@ -4,15 +4,15 @@
  * Description: Implementation of an int sequence with enqueue/dequeue ...
  * Class Invariant: ... in FIFO order
  *
- * Author: Maheeppartap Singh
- * Date: 2018-02-04
+ * Author: Maheeppartap Singh and Conor Murphy
+ * Date: 2018-02-20
  */
 #include "EmptyDataCollectionException.h"
 template <class ElementType>
 
 class Queue {
 private:
-    static int const INITIAL_SIZE = 100;
+    static int const INITIAL_SIZE = 6;
     ElementType* elements;
 
     int elementCount;  // number of elements in the queue
@@ -39,7 +39,7 @@ public:
 
     // Desc:  Returns a copy of the frontmost element (O(1))
     //  Pre:  Queue not empty
-    ElementType & peek(EmptyDataCollectionException) const;
+    ElementType & peek(const EmptyDataCollectionException &) const;
 
 
     // Desc:  Returns true if and only if queue empty (O(1))
@@ -58,7 +58,7 @@ Queue<ElementType>::Queue() : elementCount(0), capacity(INITIAL_SIZE), frontinde
 template <class ElementType>
 bool Queue<ElementType>::enqueue(ElementType x) {
     int oldCount = elementCount;
-  /*  if(elementCount == capacity){   //Checks if the Queue is full or not
+    if(elementCount == capacity){   //Checks if the Queue is full or not
         int newSize = capacity*2;  //Doubles the capacity
         auto new_arr = new ElementType[newSize];
         int i,j = 0;
@@ -66,13 +66,13 @@ bool Queue<ElementType>::enqueue(ElementType x) {
             new_arr[j] = elements[i];
             j++;
         }
-        delete elements;    //Deleting the old Queue
+        delete[] elements;    //Deleting the old Queue
         elements = new_arr;
         backindex = capacity;
         capacity = newSize;
         frontindex = 0;
     }
-*/
+
     elementCount++;
     elements[backindex] = x;    //Insert the new element
     backindex = (backindex + 1) % capacity;
@@ -109,7 +109,7 @@ bool Queue<ElementType>::isEmpty() const {
 }
 template <class ElementType>
 Queue<ElementType>::~Queue() {
-    delete elements;
+    delete[] elements;
 }
 
 // Desc:  Returns a copy of the frontmost element (O(1))
@@ -117,7 +117,7 @@ Queue<ElementType>::~Queue() {
 
 
 template<class ElementType>
-ElementType & Queue<ElementType>::peek(EmptyDataCollectionException) const {
+ElementType & Queue<ElementType>::peek(const EmptyDataCollectionException &) const {
    try{if(isEmpty())
         throw EmptyDataCollectionException("Queue is empty\n");
     }

@@ -1,3 +1,10 @@
+/*
+ * Main function of the app.
+ *
+ * Made by - Maheeppartap Singh and Conor Murphy
+ */
+
+
 #include <iostream>
 #include <fstream>
 #include "Event.h"
@@ -9,6 +16,7 @@
 
 using namespace std;
 int main() {
+
     cout<<"Simulation Begins"<<endl;
     Queue<Event> BankLine;  //Empty bank line
     PriorityQueue<Event> EventQueue;    //Empty Event Queue
@@ -16,7 +24,6 @@ int main() {
     float avg = 0;
 
     bool tellerAvailable = true;    //Teller is available
-//We have to place the input file in the cmake-build-debug folder for the program to read because it looks for it there by default
     ifstream file;
     file.open("../simulationShuffled1.in");
     if( !file ) {
@@ -43,19 +50,19 @@ int main() {
         Event customer = newEvent;
         //getting current time
         int curentTime = newEvent.getTime();
-        if (newEvent.getType() == 'A') {
+        if (newEvent.getType() == 'A') {    //if typeis arrival
             EventQueue.dequeue();
             if(BankLine.isEmpty() && tellerAvailable ){
-                dep.setType('D');
+                dep.setType('D');   //creating a departure event
                 dep.setTime(curentTime+newEvent.getLength());
                 dep.setLength(0);
                 cout<<"Processing an arrival event at time:   "<<curentTime<<endl;
                 EventQueue.enqueue(dep);
                 pplCounter++;
-                tellerAvailable = false;
+                tellerAvailable = false;    //teller is no longer available
             } else{
                 cout<<"Processing an arrival event at time:   "<<curentTime<<endl;
-                pplCounter++;
+                pplCounter++;   //customers++
                 BankLine.enqueue(customer);
             }
         } else {//Its a departure event now
@@ -78,7 +85,6 @@ int main() {
     cout<<"Final Statistics:"<<endl;
     cout<<"    Total number of people processed:  "<<pplCounter<<endl;
     cout<<"    Average amount of time spent waiting: "<<avg/pplCounter<<endl;
-
 
     return 0;
 }

@@ -1,37 +1,53 @@
 
+/*
+ *  Implementation of the Event class which consists of the events that take place during the simulation.
+ *  variables of this class :
+ *  int time -> time of start of event
+ *  char type -> Arrival 'A' or departure 'D' event
+ *  int length -> length of processing the event
+ */
+
 #include <stdio.h>
 #include "Event.h"
 using namespace std;
-/*todo: add a destructor
- *
-*/
+
+//Sets the time
 void Event::setTime(const int t) {
     time = t;
 }
 
+//sets the type.
+//Precondition : input should be 'A' or 'D'
 void Event::setType(const char m) {
+    if( m == 'A' || m == 'D')
     type = m;
+    else{
+        cout<<"Incorrect input."<<endl;
+    }
+
 }
 
-void Event::setLength(const int l) {
-    length = l;
+//set length
+void Event::setLength(const int len) {
+    length = len;
 }
 
+//returns type
 int Event::getTime() const {
     return time;
 }
 
+//returns type
 char Event::getType() const{
     return type;
 }
 
+//returns length
 int Event::getLength() const {
     return length;
 }
 
-
-
-
+//Constructing th Event
 Event::Event() {
    length = 0;
    time = 0;
@@ -47,18 +63,24 @@ ostream &operator << (ostream &os, const Event &e)  {
 
 
 //overloading the comparison operators to compare events
-
 bool operator<(Event a, Event b) {
-
-    return a.getTime() < b.getTime();
+    if(a.getTime() != b.getTime())
+         return a.getTime() < b.getTime();
+    else
+        return a.getType()>b.getType();
 }
+
 
 bool operator>(Event b, Event a) {
-    if (b.getType() < a.getType())
-        return true;
-    else if (a.getType() == b.getType()) {
-        return b.getTime() <= a.getTime();
+    if(a.getTime() != b.getTime())
+        return a.getTime() < b.getTime();
+    else
+        return a.getType()<b.getType();
     }
-    return false;
+
+Event::~Event() {
+    delete[] a;
 }
+
+
 

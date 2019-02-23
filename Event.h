@@ -1,6 +1,8 @@
-//
-// Created by mahee on 2019-02-12.
-//
+
+/*
+ * Declaration of the Events in the app, that is arrival and departure of customers
+ * Made by : Maheeppartap Singh and Conor Murphy
+ */
 
 #ifndef ASSIGNMENT_3_EVENT_H
 #define ASSIGNMENT_3_EVENT_H

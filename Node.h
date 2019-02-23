@@ -1,4 +1,9 @@
 
+/*
+ * Node class of the app
+ *
+ * Made by : Maheeppartap Singh and Conor Murphy
+ */
 #pragma once
 
 template<class T>
