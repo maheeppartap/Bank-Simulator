@@ -78,9 +78,7 @@ bool operator>(Event b, Event a) {
         return a.getType()<b.getType();
     }
 
-Event::~Event() {
-    delete[] a;
-}
+
 
 
 
