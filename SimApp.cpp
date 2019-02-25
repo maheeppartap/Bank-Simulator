@@ -71,7 +71,7 @@ int main() {
                     cout << "Processing an arrival event at time:    " << curentTime << endl;
                 }else if(curentTime/10 >= 1 && curentTime/10 < 10){
                     cout << "Processing an arrival event at time:   " << curentTime << endl;
-                }else if(  curentTime/10 < 100 ){
+                }else if(  curentTime/10 <= 100 ){
                     cout << "Processing an arrival event at time:  " << curentTime << endl;
                 }
                 pplCounter++;   //customers++
