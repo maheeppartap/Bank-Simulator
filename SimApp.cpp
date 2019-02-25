@@ -25,7 +25,7 @@ int main() {
 
     bool tellerAvailable = true;    //Teller is available
     ifstream file;
-    file.open("../simulationShuffled1.in");
+    file.open("../simulationShuffled2.in");
     if( !file ) {
         cerr << "FAILED : Could not open the file" << endl;
         exit(-1);
@@ -56,17 +56,36 @@ int main() {
                 dep.setType('D');   //creating a departure event
                 dep.setTime(curentTime+newEvent.getLength());
                 dep.setLength(0);
-                cout<<"Processing an arrival event at time:   "<<curentTime<<endl;
+                if(curentTime/10 < 1) {
+                    cout << "Processing an arrival event at time:    " << curentTime << endl;
+                }else if(curentTime/10 > 1 && curentTime/10 < 10){
+                     cout << "Processing an arrival event at time:   " << curentTime << endl;
+                }else if( curentTime/10 < 100){
+                    cout << "Processing an arrival event at time:  " << curentTime << endl;
+                }
                 EventQueue.enqueue(dep);
                 pplCounter++;
                 tellerAvailable = false;    //teller is no longer available
             } else{
-                cout<<"Processing an arrival event at time:   "<<curentTime<<endl;
+                if(curentTime/10 < 1) {
+                    cout << "Processing an arrival event at time:    " << curentTime << endl;
+                }else if(curentTime/10 >= 1 && curentTime/10 < 10){
+                    cout << "Processing an arrival event at time:   " << curentTime << endl;
+                }else if(  curentTime/10 < 100 ){
+                    cout << "Processing an arrival event at time:  " << curentTime << endl;
+                }
                 pplCounter++;   //customers++
                 BankLine.enqueue(customer);
             }
         } else {//Its a departure event now
-            cout<<"Processing a departure event at time:  "<<curentTime<<endl;
+            if(curentTime/10 < 1) {
+                cout << "Processing a departure event at time:   " << curentTime << endl;
+            }else if(curentTime/10 >= 1 && curentTime/10 < 10){
+                cout << "Processing a departure event at time:  " << curentTime << endl;
+            }else if( curentTime/10 < 100){
+                cout << "Processing a departure event at time: " << curentTime << endl;
+            }
+
             EventQueue.dequeue();
             if( !BankLine.isEmpty()){
                 //next customer
