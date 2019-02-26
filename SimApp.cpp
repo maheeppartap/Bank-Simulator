@@ -25,7 +25,7 @@ int main() {
 
     bool tellerAvailable = true;    //Teller is available
     ifstream file;
-    file.open("../simulationShuffled2.in");
+    file.open("../simulationShuffled1.in");
     if( !file ) {
         cerr << "FAILED : Could not open the file" << endl;
         exit(-1);
@@ -57,33 +57,33 @@ int main() {
                 dep.setTime(curentTime+newEvent.getLength());
                 dep.setLength(0);
                 if(curentTime/10 < 1) {
-                    cout << "Processing an arrival event at time:    " << curentTime << endl;
+                    cout << "Processing an arrival event at time:     " << curentTime << endl;
                 }else if(curentTime/10 > 1 && curentTime/10 < 10){
-                     cout << "Processing an arrival event at time:   " << curentTime << endl;
+                    cout << "Processing an arrival event at time:    " << curentTime << endl;
                 }else if( curentTime/10 < 100){
-                    cout << "Processing an arrival event at time:  " << curentTime << endl;
+                    cout << "Processing an arrival event at time:   " << curentTime << endl;
                 }
                 EventQueue.enqueue(dep);
                 pplCounter++;
                 tellerAvailable = false;    //teller is no longer available
             } else{
                 if(curentTime/10 < 1) {
-                    cout << "Processing an arrival event at time:    " << curentTime << endl;
+                    cout << "Processing an arrival event at time:     " << curentTime << endl;
                 }else if(curentTime/10 >= 1 && curentTime/10 < 10){
-                    cout << "Processing an arrival event at time:   " << curentTime << endl;
+                    cout << "Processing an arrival event at time:    " << curentTime << endl;
                 }else if(  curentTime/10 <= 100 ){
-                    cout << "Processing an arrival event at time:  " << curentTime << endl;
+                    cout << "Processing an arrival event at time:   " << curentTime << endl;
                 }
                 pplCounter++;   //customers++
                 BankLine.enqueue(customer);
             }
         } else {//Its a departure event now
             if(curentTime/10 < 1) {
-                cout << "Processing a departure event at time:   " << curentTime << endl;
+                cout << "Processing a departure event at time:    " << curentTime << endl;
             }else if(curentTime/10 >= 1 && curentTime/10 < 10){
-                cout << "Processing a departure event at time:  " << curentTime << endl;
+                cout << "Processing a departure event at time:   " << curentTime << endl;
             }else if( curentTime/10 < 100){
-                cout << "Processing a departure event at time: " << curentTime << endl;
+                cout << "Processing a departure event at time:  " << curentTime << endl;
             }
 
             EventQueue.dequeue();
@@ -95,14 +95,14 @@ int main() {
                 dep.setTime(curentTime+customer.getLength());
                 EventQueue.enqueue(dep);
                 avg = avg + curentTime - customer.getTime();
-               }else {
+            }else {
                 tellerAvailable = true;
             }
         }
     }
     cout<<"Simulation Ends"<<endl<<endl;
-    cout<<"Final Statistics:"<<endl;
-    cout<<"    Total number of people processed:  "<<pplCounter<<endl;
+    cout<<"Final Statistics:"<<endl<<endl;
+    cout<<"    Total number of people processed: "<<pplCounter<<endl;
     cout<<"    Average amount of time spent waiting: "<<avg/pplCounter<<endl;
 
     return 0;
