@@ -49,7 +49,7 @@ public:
     // Description: Inserts newElement in sort order.
     //              It returns "true" if successful, otherwise "false".
     // Precondition: This Priority Queue is sorted.
-    // Postcondition: Once newElement is inserted, this Priority Queue remains sorted.
+    // Post-condition: Once newElement is inserted, this Priority Queue remains sorted.
     // Time Efficiency: O(n)
     bool enqueue(const T& newElement);
 
@@ -61,7 +61,7 @@ public:
 
     // Description: Returns the element with the "highest" priority.
     // Precondition: This Priority Queue is not empty.
-    // Postcondition: This Priority Queue is unchanged.
+    // Post-condition: This Priority Queue is unchanged.
     // Exceptions: Throws EmptyDataCollectionException if this Priority Queue is empty.
     // Time Efficiency: O(1)
     T& peek() noexcept(false);
@@ -116,7 +116,7 @@ bool PriorityQueue<T>::enqueue(const T &newElement) {
         return true;
     }
     //special case if smaller than the head
-    if(newElement < head->data){                //this wont work because we aernt comparing the events.
+    if(newElement < head->data){
         head = new Node<T>(newElement,head);    //overload the > operator
         elementCount++;
         return true;
@@ -149,7 +149,7 @@ bool PriorityQueue<T>::dequeue() {
 template<class T>
 T &PriorityQueue<T>::peek(){
 
-    if(isEmpty())   //Cehcking if the queue is empty
+    if(isEmpty())   //Checking if the queue is empty
         throw EmptyDataCollectionException("Queue is empty\n");
 
     return head->data;

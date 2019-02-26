@@ -23,17 +23,17 @@ public:
     Event();
     //Destructor
 
-//Here are the setters
+    // Setters
     void setTime(int time);
     void setType( char type);
     void setLength(int length);
 
 
-//Getters
+    //Getters
     int getTime()const;
     char getType()const;
     int getLength()const;
-
+    //Some overloading operators
     friend ostream&operator<<(ostream & os,const Event & e);
 
     friend bool operator <(Event a,Event b);

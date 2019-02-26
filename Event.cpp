@@ -47,7 +47,7 @@ int Event::getLength() const {
     return length;
 }
 
-//Constructing th Event
+//Constructing the Event
 Event::Event() {
    length = 0;
    time = 0;

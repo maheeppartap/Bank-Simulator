@@ -50,7 +50,7 @@ int main() {
         Event customer = newEvent;
         //getting current time
         int curentTime = newEvent.getTime();
-        if (newEvent.getType() == 'A') {    //if typeis arrival
+        if (newEvent.getType() == 'A') {    //if type is arrival
             EventQueue.dequeue();
             if(BankLine.isEmpty() && tellerAvailable ){
                 dep.setType('D');   //creating a departure event
@@ -64,7 +64,7 @@ int main() {
                     cout << "Processing an arrival event at time:   " << curentTime << endl;
                 }
                 EventQueue.enqueue(dep);
-                pplCounter++;
+                pplCounter++;   //Customer ++
                 tellerAvailable = false;    //teller is no longer available
             } else{
                 if(curentTime/10 < 1) {
