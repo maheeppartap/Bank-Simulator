@@ -24,18 +24,13 @@ int main() {
     float avg = 0;
 
     bool tellerAvailable = true;    //Teller is available
-    ifstream file;
-    file.open("../simulationShuffled1.in");
-    if( !file ) {
-        cerr << "FAILED : Could not open the file" << endl;
-       return -1;
-    }
+
     int arrival,pTime;
     Event arr,dep;
     //Read input and insert into the Event Queue
-    while( !file.eof()){
-        file>>arrival;
-        file>>pTime;
+    while( !cin.eof()){
+        cin>>arrival;
+        cin>>pTime;
         arr.setTime(arrival);
         arr.setLength(pTime);
         arr.setType('A');
