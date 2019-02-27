@@ -60,7 +60,7 @@ bool Queue<ElementType>::enqueue(ElementType x) {
     int oldCount = elementCount;
     if(elementCount == capacity){   //Checks if the Queue is full or not
         int newSize = capacity*2;  //Doubles the capacity
-        auto new_arr = new ElementType[newSize];
+        ElementType* new_arr = new ElementType[newSize];
         int i,j = 0;
         for(i = frontindex ; j < capacity ; i = ( i + 1)%capacity){
             new_arr[j] = elements[i];
@@ -86,7 +86,7 @@ template <class ElementType>
 bool Queue<ElementType>::dequeue() {
     int oldCount = elementCount;
     if( elementCount < capacity/4 && elementCount/4 > INITIAL_SIZE){    //Checks if the Queue is 1/4 of the capacity
-        auto * new_arr = new ElementType[capacity/4];                      //Making a new array with 1/4th of the capacity to save space
+        ElementType* new_arr = new ElementType[capacity/4];                      //Making a new array with 1/4th of the capacity to save space
         int j = 0;
         for(int i = frontindex ; j < capacity ; i = ( i + 1)%capacity){
             new_arr[j] = elements[i];

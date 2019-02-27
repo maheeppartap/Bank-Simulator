@@ -24,14 +24,14 @@ template <class T>//Constructor of Node without data
 Node<T>::Node()
 {
 	data = 0;
-	next = nullptr;
+	next = NULL;
 }
 
 template <class T>//Constructor of Node with data
 Node<T>::Node(T theData)
 {
 	data = theData;
-	next = nullptr;
+	next = NULL;
 }
 
 template <class T>//Constructor of Node with data and pointer to next Node

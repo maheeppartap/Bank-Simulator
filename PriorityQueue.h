@@ -64,7 +64,7 @@ public:
     // Post-condition: This Priority Queue is unchanged.
     // Exceptions: Throws EmptyDataCollectionException if this Priority Queue is empty.
     // Time Efficiency: O(1)
-    T& peek() noexcept(false);
+    T& peek();//////////////////////// noexcept(false);
 
     friend ostream & operator<< (ostream & os, const PriorityQueue<T>& rhs) {
         Node<T>* current = rhs.head;
@@ -90,7 +90,7 @@ PriorityQueue<T>::PriorityQueue() {
 template<class T>
 PriorityQueue<T>::~PriorityQueue(){
     Node<T>* t = head;
-    while(t != nullptr){
+    while(t != NULL){
         Node<T>* temp = t->next;
         delete t;
         t = temp;
@@ -104,14 +104,14 @@ int PriorityQueue<T>::getElementCount() const {
 
 template<class T>
 bool PriorityQueue<T>::isEmpty() const {
-    return head == nullptr;
+    return head == NULL;
 }
 
 template<class T>
 bool PriorityQueue<T>::enqueue(const T &newElement) {
 
     if(isEmpty()){
-        head = new Node<T>(newElement, nullptr);
+        head = new Node<T>(newElement, NULL);
         elementCount++;      //you werent incrementing the elementcount in the special cases
         return true;
     }
@@ -123,10 +123,10 @@ bool PriorityQueue<T>::enqueue(const T &newElement) {
     }
     Node<T>* t = head;
         //get t to either the first element that is the same
-    while(t->next != nullptr && t->next->data < newElement)
+    while(t->next != NULL && t->next->data < newElement)
         t = t->next;
 
-    auto * node = new Node<T>(newElement,t->next);
+    Node<T>* node = new Node<T>(newElement,t->next);
     t->next = node;
     elementCount++;
     return true;
