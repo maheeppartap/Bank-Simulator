@@ -28,7 +28,7 @@ int main() {
     file.open("../simulationShuffled1.in");
     if( !file ) {
         cerr << "FAILED : Could not open the file" << endl;
-        exit(-1);
+       return -1;
     }
     int arrival,pTime;
     Event arr,dep;
